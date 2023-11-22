@@ -86,13 +86,49 @@ myConsoleApplication.exe install
 14. Run the service with **name:YOUR_NAME** and it setup name for the service.
 15. Run the service with **start-immediately:(true|false)** to start service immediately after install. Defaults to **true**.
 
-## Contributing
+## Example and explanation
 
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a [pull request](https://github.com/bbsoft0/WindowsServicesExample/pulls) :D
+in Service class add methods
+```
+public bool Start() {..}
+public bool Pause() {..}
+public bool Continue() {..}
+public bool Stop() {..}
+public bool CustomCommand() {..}
+public bool FileCreated() {..}
+```
+
+in Program.cs Main :
+```
+HostFactory.Run(serviceConfig =>
+{
+    serviceConfig.UseNLog();
+
+    serviceConfig.Service<ConverterService>(serviceInstance =>
+    {
+        serviceInstance.ConstructUsing(() => new ConverterService());
+        serviceInstance.WhenStarted(execute => execute.Start());
+        serviceInstance.WhenStopped(execute => execute.Stop());
+        serviceInstance.WhenPaused(execute => execute.Pause());
+        serviceInstance.WhenContinued(execute => execute.Continue());
+        serviceInstance.WhenCustomCommandReceived((execute, hostControl, commandNumber) => execute.CustomCommand(commandNumber));
+    });
+
+    serviceConfig.EnableServiceRecovery(recoveryOption =>
+    {
+        recoveryOption.RestartService(1);   //1 minute delay    
+        recoveryOption.RestartComputer(60,"Demo");
+        recoveryOption.RunProgram(5, @"C:\\Windows\\System32\\notepad.exe");
+        recoveryOption.SetResetPeriod(1);
+    });
+
+    serviceConfig.EnablePauseAndContinue();
+    serviceConfig.SetServiceName("DemoFileConverterService");
+    serviceConfig.SetDisplayName("Demo File Converter Service");
+    serviceConfig.SetDescription("This service converts files from lower case to upper case.");
+    serviceConfig.StartAutomatically();
+});
+```
 
 ## License
 
