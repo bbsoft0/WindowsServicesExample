@@ -6,7 +6,7 @@ Complete solution with all important usages.
 ## Reasons to use Windows Services
 
 * Run even when no user is logged in
-* Start automaticLLY on machine boot
+* Start automatically on machine boot
 * Run as different users (built-in)
 * Start, Stop, Pause, Resume Services
 * Auto Restart - failure policy easy to implement
@@ -17,6 +17,7 @@ Complete solution with all important usages.
 * Health / heartbeat monitoring ( Execute API periodically)
 
 ## Service Log On Accounts
+
 *Local System - Privileges on local machine, not recommended for running custom services
 *Local Service - Presents as anonymous on network
 *Network Service - Machine Account on network
@@ -62,12 +63,12 @@ The windows service control manager - can be seen as services.exe in Task Manage
 6. Run cmd.exe as administrator
    
 8. Navigate the console to
-	```
+```
  .\myConsoleApplication\bin\Release\
-	```
+```
+
 8. Install the service with 
 myConsoleApplication.exe install
-
 
 9. Run the service without arguments and it runs like console app.
 10. Run the service with **action:install** and it will install the service.
