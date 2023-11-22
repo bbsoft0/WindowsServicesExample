@@ -130,6 +130,15 @@ HostFactory.Run(serviceConfig =>
 });
 ```
 
+The service uses NLog package to write logs on a text file.
+
+The line who starts the service in auto mode is 
+```
+serviceConfig.StartAutomatically();
+```
+    
+
+
 ## License
 
 [MIT](https://github.com/bbsoft0/WindowsServicesExample/blob/master/LICENSE)
