@@ -1,2 +1,96 @@
 # WindowsServiceConsole
 Windows Services using TopShelf - Complete usage using Files Converter deployed as service.
+
+Complete solution with all important usages.
+
+## Reasons to use Windows Services
+
+* Run even when no user is logged in
+* Start automaticLLY on machine boot
+* Run as different users (built-in)
+* Start, Stop, Pause, Resume Services
+* Auto Restart - failure policy easy to implement
+* Dependencies on other services running
+* Manage froom remote machines (stop)
+* Monitoring via Windows event log
+* System integration ( file ingestion and data transfer between systems)
+* Health / heartbeat monitoring ( Execute API periodically)
+
+## Service Log On Accounts
+*Local System - Privileges on local machine, not recommended for running custom services
+*Local Service - Presents as anonymous on network
+*Network Service - Machine Account on network
+*Local User custom account - User account created on local, permissions can be customized
+*Domain User custom account - User account created on domain, permissions can be customized. Network file shares, domain services
+
+For security, always use an account that has the minimum permissions required for the service to do its job
+
+## Service Recovery Options
+### Recovery actions
+* Restart the service (after n minutes)
+* Take no action
+* Run a program
+* Restart the computer (after n minutes)
+
+### Multiple recovery actions
+* First failuer
+* Second failure
+* Subsequent failures
+* Reset failure count after n days
+
+## windows service control manager
+The windows service control manager - can be seen as services.exe in Task Manager
+* sc.exe - can be used on the command line
+* maintain database of installed services
+* starting, stopping, pausing, resuming of services
+* querying installed services and service state
+* sending control messages to services
+  
+
+## Installation and usage 
+
+1. Create .NETCore console app.
+	
+2. Right click on references and go to manage NuGet-Packages
+
+3. Download and install Topshelf via NuGet
+
+4. Paste the Code below into your application and include all imports.
+
+5. Switch from “Debug” mode to “Release” and build the application.
+
+6. Run cmd.exe as administrator
+   
+8. Navigate the console to
+	```
+ .\myConsoleApplication\bin\Release\
+	```
+8. Install the service with 
+myConsoleApplication.exe install
+
+
+9. Run the service without arguments and it runs like console app.
+10. Run the service with **action:install** and it will install the service.
+11. Run the service with **action:uninstall** and it will uninstall the service.
+12. Run the service with **action:start** and it will start the service.
+13. Run the service with **action:stop** and it will stop the service.
+9. Run the service with **action:pause** and it will pause the service.
+9. Run the service with **action:continue** and it will continue the service.
+10. Run the service with **username:YOUR_USERNAME**, **password:YOUR_PASSWORD** and **action:install** which installs it for the given account.
+11. Run the service with **built-in-account:(NetworkService|LocalService|LocalSystem)** and **action:install** which installs it for the given built in account. Defaults to **LocalSystem**.
+12. Run the service with **description:YOUR_DESCRIPTION** and it setup description for the service.
+13. Run the service with **display-name:YOUR_DISPLAY_NAME** and it setup Display name for the service.
+14. Run the service with **name:YOUR_NAME** and it setup name for the service.
+15. Run the service with **start-immediately:(true|false)** to start service immediately after install. Defaults to **true**.
+
+## Contributing
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a [pull request](https://github.com/bbsoft0/WindowsServicesExample/pulls) :D
+
+## License
+
+[MIT](https://github.com/bbsoft0/WindowsServicesExample/blob/master/LICENSE)
