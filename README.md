@@ -34,7 +34,7 @@ For security, always use an account that has the minimum permissions required fo
 * Restart the computer (after n minutes)
 
 ### Multiple recovery actions
-* First failuer
+* First failure
 * Second failure
 * Subsequent failures
 * Reset failure count after n days
@@ -67,14 +67,16 @@ The windows service control manager - can be seen as services.exe in Task Manage
  .\myConsoleApplication\bin\Release\
 ```
 
-8. Install the service with 
+8. Install the service with
+```
 myConsoleApplication.exe install
+```
 
-9. Run the service without arguments and it runs like console app.
-10. Run the service with **action:install** and it will install the service.
-11. Run the service with **action:uninstall** and it will uninstall the service.
-12. Run the service with **action:start** and it will start the service.
-13. Run the service with **action:stop** and it will stop the service.
+10. Run the service without arguments and it runs like console app.
+11. Run the service with **action:install** and it will install the service.
+12. Run the service with **action:uninstall** and it will uninstall the service.
+13. Run the service with **action:start** and it will start the service.
+14. Run the service with **action:stop** and it will stop the service.
 9. Run the service with **action:pause** and it will pause the service.
 9. Run the service with **action:continue** and it will continue the service.
 10. Run the service with **username:YOUR_USERNAME**, **password:YOUR_PASSWORD** and **action:install** which installs it for the given account.
